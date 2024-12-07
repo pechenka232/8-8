@@ -1,0 +1,23 @@
+from itertools import combinations, permutations
+
+def is_valid(board):
+    for col in zip(*board): 
+        if sum(col) != 3:
+            return False
+    return True
+
+def generate_board():
+    rows = list(combinations(range(8), 3)) 
+    for row_indices in permutations(rows, 8):  
+        board = [[1 if j in row else 0 for j in range(8)] for row in row_indices]
+        if is_valid(board):
+            return board
+    return None
+
+board = generate_board()
+
+if board:
+    for row in board:
+        print(' '.join(map(str, row)))
+else:
+    print("Решение не найдено")
